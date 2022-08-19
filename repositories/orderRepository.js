@@ -21,7 +21,7 @@ export async function getAllOrders(date, orderId) {
     ${date !== undefined ? `WHERE "createdAt" >= '${date} 00:00:00' AND "createdAt" < '${date} 23:59:59.999999'` : ""}
     ${orderId !== undefined ? `WHERE orders.id=${orderId}` : ""}
     ;`);
-    const arraydeobjetos = rows.map((item) => {
+    const array = rows.map((item) => {
         const obj = {
             client: {
                 id: item.clientId,
@@ -43,5 +43,5 @@ export async function getAllOrders(date, orderId) {
         }
         return obj;
     })
-    return arraydeobjetos;
+    return array;
 }
