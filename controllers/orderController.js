@@ -21,7 +21,8 @@ export async function postOrders(req, res) {
 export async function getOrders(req, res) {
     try {
         const date = req.query.date;
-        const data = await getAllOrders(date);
+        const id = req.params.id;
+        const data = await getAllOrders(date, id);
         if (data.length === 0) {
             return res.status(404).send([]);
         }

@@ -12,13 +12,14 @@ export async function findOrderByDate(date) {
     return orders;
 }
 
-export async function getAllOrders(date) {
+export async function getAllOrders(date, orderId) {
     const { rows } = await connection.query(`SELECT clients.name as "clientName", clients.address as "clientAddress", clients.phone as "clientPhone", cakes.name as "cakeName", cakes.price as "cakePrice", cakes.description as "cakeDescription", cakes.image as "cakeImage", orders.* FROM orders
     JOIN clients
     ON orders."clientId"=clients.id
     JOIN cakes
     ON orders."cakeId"=cakes.id
     ${date !== undefined ? `WHERE "createdAt" >= '${date} 00:00:00' AND "createdAt" < '${date} 23:59:59.999999'` : ""}
+    ${orderId !== undefined ? `WHERE orders.id=${orderId}` : ""}
     ;`);
     const arraydeobjetos = rows.map((item) => {
         const obj = {
@@ -35,7 +36,7 @@ export async function getAllOrders(date) {
                 description: item.cakeDescription,
                 image: item.cakeImage
             },
-            orderId: item.orderId,
+            orderId: item.id,
             createdAt: item.createdAt,
             quantity: item.quantity,
             totalPrice: Number(item.totalPrice)
