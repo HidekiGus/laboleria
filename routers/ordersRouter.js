@@ -5,7 +5,7 @@ import { getOrders, postOrders } from "../controllers/orderController.js";
 
 const ordersRouter = Router();
 
-ordersRouter.post("/orders", validateSchema(orderSchema), postOrders);
+ordersRouter.post("/order", validateSchema(orderSchema), postOrders);
 ordersRouter.get("/orders", getOrders);
 ordersRouter.get("/orders/:id", getOrders);
 
