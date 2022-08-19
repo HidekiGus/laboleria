@@ -18,6 +18,12 @@ export default function validateSchema(schema) {
                     return res.sendStatus(400);
                 } else if (errors[i] === "string.pattern.base") { // If field received does not match pattern
                     return res.sendStatus(400);
+                } else if (errors[i] === "number.greater") { // If field number needs to be greater than what was sent
+                    return res.sendStatus(400);
+                } else if (errors[i] === "number.less") { // If field number needs to be less than what was sent
+                    return res.sendStatus(400);
+                } else if (errors[i] === "number.integer") { // If field number needs to be an integer
+                    return res.sendStatus(400);
                 }
             }
             return res.sendStatus(422); // For a generic error that is not covered
